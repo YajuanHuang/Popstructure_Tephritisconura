@@ -1,6 +1,6 @@
 ## Host plant driven genomic differentiation during the early stages of population divergence in the peacock fly *Tephritis conura*
-#### Yajuan Huang
-#### May 2022
+### Yajuan Huang
+### May 2022
 
 Code is available on: <https://github.com/YajuanHuang/Popstructure_Tephritisconura>
 
@@ -18,7 +18,7 @@ The scripts ran on the Swedish National Infrastructure for Computing (SNIC), in 
 - Python/3.6.5
 - R/4.1.1
 
-#### Note
+#### Note:
 Remeber to modify .sh files to set the working directory, edit the number of cpu and allocate memory/time.
 
 ## 01_Data
@@ -72,7 +72,7 @@ Using ADMIXTURE(v1.3.0) to perform admixture analysis.
 
 ## 07_FST
 Using the ANGSD(v0.933) to estimate FST.
-`sbatch 01_script/07_fst/04_new_fst/03_2dsfs_and_fst.sh`
+- `sbatch 01_script/07_fst/04_new_fst/03_2dsfs_and_fst.sh`
 
 ## 08_Dxy
 Dxy was calculated from .maf files, in sliding window with the window size of 5k bp and step size 1k bp, using the script developed by Julio Ayala (<https://github.com/julioaayala/popstructure_italiansparrow/tree/main/Bin/dxy_maf.py>).
@@ -96,9 +96,9 @@ Dxy was calculated from .maf files, in sliding window with the window size of 5k
 
 ## 09_Tajima's D
 Using VCFtools (v 0.1.16) to estimate Tajima's D for each population.
-- 10.1 SCH
+- 9.1 SCH
   `sbatch 01_script/09_TajimasD/03_TajimasD_SCH_5kb_vcftools.sh`
-- 10.2 SCP
+- 9.2 SCP
   `sbatch 01_script/09_TajimasD/04_TajimasD_SCP_5kb_vcftools.sh`
 
 ## 10_Pi(π)
@@ -109,7 +109,7 @@ Using VCFtools (v 0.1.16) to calculate Pi(π) for each population.
   `sbatch 01_script/10_Pi/02_SCP_vcftools_pi_win5kb.sh`
 
 ## Plotting
-The plotting scripts are in 01_scripts/RScrpits folder.
+The plotting scripts are in *01_scripts/RScrpits* folder.
 
 ## Contact
 <ya2100hu-s@student.lu.se>
