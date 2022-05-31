@@ -2,7 +2,7 @@
 #### Yajuan Huang
 #### May 2022
 
-Code is available on:
+Code is available on: <https://github.com/YajuanHuang/Popstructure_Tephritisconura>
 
 ## Description
 Using the ANGSD pipeline to estimate population structure and genetic diversity of the peacock fly *Tephritis conura*
