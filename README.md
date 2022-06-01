@@ -52,7 +52,7 @@ The following scripts will work on the bam files and calculate maf, saf and geno
   - Arguements:
     - **-minInd 13** : The whole number of scotland population is 16, set it at 80% of the whole number. 16*0.8=~13
     - **-setMinDepth 37** : Discard the site if the total sequencing depth is below the threshold. As a rule of thumb: 0.2*coverage*n. The n is 16, and the coverange is 12.295, set it to 0.2*coverage*n=0.2*12.295*16=37
-    - **-setMaxDepth 762** # Discard the site if the total sequencing depth is above the threshold. As a rule of thumb, I used 2*coverage*n. The n is 16, and the coverange is 12.295, so i set it to 2*coverage*n=2*12.295*16=370
+    - **-setMaxDepth 370** # Discard the site if the total sequencing depth is above the threshold. As a rule of thumb, I used 2*coverage*n. The n is 16, and the coverange is 12.295, so i set it to 2*coverage*n=2*12.295*16=370
 
 - 3.3 SCP
   - Submit: `sbatch 01_script/04_genotype_likelihood/03_gl_SCP.sh`
