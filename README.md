@@ -40,11 +40,25 @@ The following scripts will work on the bam files and calculate maf, saf and geno
 - 3.1 Scotland
   - Working directory
     - /proj/snic2020-6-222/Projects/Tconura/working/Yajuan/003_new_angsd/
-  - `sbatch 01_script/04_genotype_likelihood/01_gl_scotland80.sh`
+  - Submit: `sbatch 01_script/04_genotype_likelihood/01_gl_scotland80.sh`
+  - Arguements:
+    - **-minInd 25** : The whole number of scotland population is 31, set it at 80% of the whole number. 31*0.8=24.8~25
+    - **-setMinDepth 76** : Discard the site if the total sequencing depth is below the threshold. As a rule of thumb: 0.2*coverage*n. The n is 31, and the coverange is 12.295, set it to 0.2*coverage*n=0.2*12.295*31=76.299~76
+    - **-setMaxDepth 762** # Discard the site if the total sequencing depth is above the threshold. As a rule of thumb, I used 2*coverage*n. The n is 31, and the coverange is 12.295, so i set it to 2*coverage*n=2*12.295*31=762
+
 - 3.2 SCH
-`sbatch 01_script/04_genotype_likelihood/02_gl_SCH.sh`
+  - Submit: `sbatch 01_script/04_genotype_likelihood/02_gl_SCH.sh`
+  - Arguements:
+    - **-minInd 13** : The whole number of scotland population is 16, set it at 80% of the whole number. 16*0.8=~13
+    - **-setMinDepth 37** : Discard the site if the total sequencing depth is below the threshold. As a rule of thumb: 0.2*coverage*n. The n is 16, and the coverange is 12.295, set it to 0.2*coverage*n=0.2*12.295*16=37
+    - **-setMaxDepth 762** # Discard the site if the total sequencing depth is above the threshold. As a rule of thumb, I used 2*coverage*n. The n is 16, and the coverange is 12.295, so i set it to 2*coverage*n=2*12.295*16=370
+
 - 3.3 SCP
-`sbatch 01_script/04_genotype_likelihood/03_gl_SCP.sh`
+  - Submit: `sbatch 01_script/04_genotype_likelihood/03_gl_SCP.sh`
+  - Arguements:
+    - **-minInd 12** : The whole number of scotland population is 15, set it at 80% of the whole number. 31*0.8=24.8~25
+    - **-setMinDepth 39** : Discard the site if the total sequencing depth is below the threshold. As a rule of thumb: 0.2*coverage*n. The n is 15, and the coverange is 12.295, set it to 0.2*coverage*n=0.2*12.295*15=39
+    - **-setMaxDepth 392** # Discard the site if the total sequencing depth is above the threshold. As a rule of thumb, I used 2*coverage*n. The n is 15, and the coverange is 12.295, so i set it to 2*coverage*n=2*12.295*15=392
 
 ## 04_LD_prune
 Using the plink to perform LD prune(v1.90b4.9).
@@ -56,9 +70,11 @@ Using the plink to perform LD prune(v1.90b4.9).
   - `sbatch 01_script/05_PCA/06_LD_plink/04_plink_LD_prune_50SNPs0.1.sh`
 - 4.4 Keep the SNPs in .in file
   - `awk 'NR==FNR{a[$1];next}$1 in a' ../../05_scotland80_1e6_pruned.prune.in 01_scotland80.beagle > 11_scotland80_1e6_pruned.beagle`
+    - using the first column of the first file to generate a array
+    - if the first column is in the second file, print this line to the new file
 
 ## 05_PCA
-Using the PCAngsd to perform PCA analysis.
+Using the PCAngsd to perform principal component analysis (PCA).
 - 5.1 Working directory
   - /proj/snic2020-6-222/Projects/Tconura/working/Yajuan/003_new_angsd/05_PCA/05_LD_plink
 - 5.2 Compress the .beagle file
@@ -67,7 +83,7 @@ Using the PCAngsd to perform PCA analysis.
   - `sbatch 01_script/05_PCA/01_scotland80_pca.sh`
 
 ## 06_Admixture_analysis
-Using ADMIXTURE(v1.3.0) to perform admixture analysis.
+Using ADMIXTURE(v1.3.0) to perform clustering  analysis.
 `sbatch 01_script/06_admix/04_Admixture/03_scotland80_1e6_pruned_K12345.sh`
 
 ## 07_FST
@@ -81,12 +97,12 @@ Dxy was calculated from .maf files, in sliding window with the window size of 5k
 - 8.2 Split .maf file
   - SCH
     - Load module: `module load bioinfo-tools python/3.9.5`
-    - Spliting file: `python3 01_script/08_dxy/01_split_mafs.py \
+    - Spliting .mafs file: `python3 01_script/08_dxy/01_split_mafs.py \
     -i 04_genotype_likelihood/02_SCH/02_SCH.mafs \
     -o 04_genotype_likelihood/02_SCH/00_split_mafs`
   - SCP
     - Load module: `module load bioinfo-tools python/3.9.5`
-    - Spliting file: `python3 01_script/08_dxy/01_split_mafs.py \
+    - Spliting .mafs file: `python3 01_script/08_dxy/01_split_mafs.py \
     -i 04_genotype_likelihood/03_SCP/01_SCP.mafs \
     -o 04_genotype_likelihood/03_SCP/00_split_mafs`
 - 8.3 Calculate dxy
